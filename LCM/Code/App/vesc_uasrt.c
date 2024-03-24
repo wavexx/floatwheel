@@ -1,6 +1,7 @@
 #include "vesc_uasrt.h"
 #include "flag_bit.h"
 #include "eeprom.h"
+#include <string.h>
 
 uint8_t VESC_RX_Buff[256];
 uint8_t VESC_RX_Flag = 0;
@@ -357,7 +358,7 @@ uint8_t Protocol_Parse(uint8_t * message)
 	if (data.rpm < -100)
 		data.isForward = data.state == RUNNING_UPSIDEDOWN;
 	if (data.state > RUNNING_FLYWHEEL)
-		data.isForward = true
+		data.isForward = true;
 
 	return 0;
 }
