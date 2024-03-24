@@ -2,7 +2,7 @@
 #include "math.h"
 #include "eeprom.h"
 
-#define  BOOT_ANIMATION_COUNT  3
+#define  BOOT_ANIMATION_COUNT (BOOT_LAST + 1)
 
 /**************************************************
 + * Reset LCM Config
@@ -17,12 +17,12 @@ static void lcmConfigReset(void)
 	lcmConfig.statusbarMode = 0;
 	lcmConfig.boardOff = 0;
 	lcmConfig.chargeCutoffVoltage = 0;
-	lcmConfig.bootAnimation = DEFAULT;
+	lcmConfig.bootAnimation = BOOT_DEFAULT;
 	lcmConfig.dutyBeep = 90;
 	errCode = 0;
 
 	EEPROM_ReadByte(BOOT_ANIMATION, &lcmConfig.bootAnimation);
-	if (lcmConfig.bootAnimation < 0 || lcmConfig.bootAnimation > (BOOT_ANIMATION_COUNT - 1)) {
+	if (lcmConfig.bootAnimation >= BOOT_ANIMATION_COUNT) {
 		lcmConfig.bootAnimation = 0;
 	}
 
@@ -228,7 +228,7 @@ void WS2812_Boot(void)
 		{{30,0,0}, {30,30,30}, {0,0,30}, {30,0,0}, {30,30,30}, {0,0,30}, {30,0,0}, {30,30,30}, {0,0,30}, {30,0,0}}
 };
 
-	if (lcmConfig.bootAnimation < 0 || lcmConfig.bootAnimation >= BOOT_ANIMATION_COUNT) {
+	if (lcmConfig.bootAnimation >= BOOT_ANIMATION_COUNT) {
 		// Invalid boot animation
 		lcmConfig.bootAnimation = 0;
 	}

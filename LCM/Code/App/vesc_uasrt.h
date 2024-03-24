@@ -19,10 +19,11 @@ typedef struct {
 	bool isHandtest;
 }dataPackage;
 
-typedef enum {
-	DEFAULT = 0,
-	REDWHITEBLUE = 1,
-	RAINBOW = 2,
+typedef enum : uint8_t {
+	BOOT_DEFAULT = 0,
+	BOOT_REDWHITEBLUE = 1,
+	BOOT_RAINBOW = 2,
+	BOOT_LAST = BOOT_RAINBOW,
 } BootAnimation;
 
 typedef struct {
